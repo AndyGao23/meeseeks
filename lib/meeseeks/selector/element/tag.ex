@@ -1,0 +1,22 @@
+defmodule Meeseeks.Selector.Element.Tag do
+  use Meeseeks.Selector
+  @moduledoc false
+
+  alias Meeseeks.Document
+  alias Meeseeks.Selector.Element
+
+  defstruct value: nil
+
+  @impl true
+  def match(%Element.Tag{value: "*"}, %Document.Element{}, _document, _context) do
+    true
+  end
+
+  def match(selector, %Document.Element{} = element, _document, _context) do
+    element.tag == selector.value
+  end
+
+  def match(_selector, _node, _document, _context) do
+    false
+  end
+end
